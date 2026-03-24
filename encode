@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <string.h>
+
+void rle_encode(const char *input, char *output) {
+    int i = 0, j = 0;
+    int len = strlen(input);
+
+    while (i < len) {
+        char current = input[i];
+        int count = 1;
+
+        while (i + 1 < len && input[i] == input[i + 1]) {
+            count++;
+            i++;
+        }
+
+        output[j++] = current;
+        output[j++] = count;
+
+       // j += sprintf(&output[j], "%d", count);
+
+        i++;
+    }
+
+    output[j] = '\0';
+}
+
+int main() {
+    char input[] = "AAAAAAAAAAAAAAAAAAAAAAAAAABBBCCDAA";
+    char output[100];
+
+    rle_encode(input, output);
+
+    printf("Original: %s\n", input);
+    printf("Encoded : %s\n", output);
+
+    return 0;
+}
