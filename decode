@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <ctype.h>
+
+void rle_decode(const char *input, char *output) {
+    int i = 0, j = 0;
+
+    while (input[i] != '\0') {
+        char current = input[i++];
+        int count = 0;
+
+
+        while (isdigit(input[i])) {
+            count = input[i] - '0';
+            i++;
+        }
+
+        for (int k = 0; k < count; k++) {
+            output[j++] = current;
+        }
+    }
+
+    output[j] = '\0';
+}
+
+int main() {
+    char input[] = "A4B3C2D1A2";
+    char output[100];
+
+    rle_decode(input, output);
+
+    printf("Encoded : %s\n", input);
+    printf("Decoded : %s\n", output);
+
+    return 0;
+}
